@@ -68,9 +68,9 @@ const microAudioCheck = () => {
   var video = document.querySelector("video");
   video.muted = true;
   includeMic = !includeMic;
-  if (includeMic)
-    document.querySelector("#micro-audio-btn").classList.add("active");
-  else document.querySelector("#micro-audio-btn").classList.remove("active");
+  // if (includeMic)
+  //   document.querySelector("#micro-audio-btn").classList.add("active");
+  // else document.querySelector("#micro-audio-btn").classList.remove("active");
   console.log("Audio =", includeMic);
 };
 

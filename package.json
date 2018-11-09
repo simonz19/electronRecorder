@@ -1,7 +1,7 @@
 {
   "name": "electron-screen-recorder",
   "description": "Screen Recorder",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "author": "hokein",
   "license": "BSD",
   "keywords": [
@@ -11,20 +11,24 @@
     "WebRTC"
   ],
   "scripts": {
-    "build": "electron-packager ./src ElectronScreenRecorder  --platform=darwin --arch=x64 --version=0.36.0 --icon=src/Icon.icns",
-    "build-all": "electron-packager ./src ElectronScreenRecorder  --all --version=0.36.0 --icon=src/Icon.icns",
-    "start": "electron ."
+    "build": "electron-packager ./ app --app-version=0.0.1 --overwrite && npm run zip",
+    "launch": "node ./launch.js",
+    "build-all": "electron-packager ./ app  --all --app-version=0.0.1 --overwrite",
+    "start": "electron ./",
+    "zip": "electron-installer-zip ./app-win32-x64 ./dist/app.zip"
   },
   "main": "src/main.js",
   "bin": {
     "electron-screen-recorder": "./launch.js"
   },
   "devDependencies": {
-    "electron-packager": "^10.1.0",
+    "cross-env": "^5.2.0",
+    "electron": "^3.0.8",
+    "electron-installer-zip": "^0.1.2",
+    "electron-packager": "^12.2.0",
     "electron-prebuilt": "^1.4.13"
   },
   "dependencies": {
-    "domify": "^1.4.0",
-    "electron": "1.7.9"
+    "domify": "^1.4.0"
   }
 }

@@ -55,3 +55,33 @@ video {
   width:100%;
   border: 1px solid #37474f;
 }
+
+input[type="checkbox"]{
+  -webkit-appearance: none;
+  vertical-align:middle;
+  margin-top:0;
+  background:#fff;
+  border:#999 solid 1px;
+  border-radius: 3px;
+  min-height: 16px;
+  min-width: 16px;
+}
+input[type="checkbox"]:checked {
+  background: #d7f2ff;
+}
+input[type=checkbox]:checked::after{
+  content: '';
+  top: 3px;
+  left: 3px;
+  position: absolute;
+  background: transparent;
+  border: #fff solid 2px;
+  border-top: none;
+  border-right: none;
+  height: 6px;
+  width: 10px;
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg); 
+  transform: rotate(-45deg);
+}

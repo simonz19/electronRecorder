@@ -6,8 +6,8 @@ let pickerDialog;
 const getMainWindow = () => {
   if (!mainWindow) {
     mainWindow = new BrowserWindow({
-      height: 500,
-      width: 600
+      height: 630,
+      width: 900
     });
   }
   mainWindow.loadURL("file://" + __dirname + "/index.html");
@@ -30,7 +30,7 @@ const getPickerDialog = () => {
     });
   }
   pickerDialog.loadURL("file://" + __dirname + "/picker.html");
-  pickerDialog.webContents.openDevTools()
+  // pickerDialog.webContents.openDevTools()
   pickerDialog.on("closed", () => {
     pickerDialog = null;
   });
