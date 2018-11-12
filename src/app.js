@@ -81,6 +81,11 @@ const cleanRecord = () => {
   numRecordedChunks = 0;
 };
 
+/** process args will be passed by when main mainWindow is finish loaded */
+ipcRenderer.on('get-process-args', (event, options) => {
+  console.log('options', options);
+})
+
 ipcRenderer.on("source-id-selected", (event, sourceId) => {
   // Users have cancel the picker dialog.
   if (!sourceId) return;

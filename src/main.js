@@ -1,7 +1,34 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+const qs = require("qs");
+
+// var cp = require("child_process");
+// //删除vanish2的键值
+// cp.exec("REG QUERY HKEY_CLASSES_ROOT\\MyAPP\\shell\\open\\command", function(
+//   error,
+//   stdout,
+//   stderr
+// ) {
+//   console.log('error', error);
+//   console.log('stdout', stdout);
+//   console.log('stderr', stderr);
+// });
+
+const argv = process.argv;
+let params;
 
 let mainWindow;
 let pickerDialog;
+
+/** only main process can access node run time */
+const parseArgv = () => {
+  const searchReg = /myapp:\/\/([^\/]+)\/?/.exec(argv[1]);
+  const search = searchReg && searchReg[1];
+  if (search) {
+    params = qs.parse(search);
+  }
+};
+
+parseArgv();
 
 const getMainWindow = () => {
   if (!mainWindow) {
@@ -14,6 +41,14 @@ const getMainWindow = () => {
   mainWindow.webContents.openDevTools();
   mainWindow.on("closed", () => {
     mainWindow = null;
+  });
+  mainWindow.webContents.on("did-finish-load", () => {
+    mainWindow.webContents.send("get-process-args", { argv, params });
+    if (params && params.type === "screen") {
+      openPickerDialog(null, {
+        types: ["screen"]
+      });
+    }
   });
   return mainWindow;
 };
@@ -30,25 +65,29 @@ const getPickerDialog = () => {
     });
   }
   pickerDialog.loadURL("file://" + __dirname + "/picker.html");
-  // pickerDialog.webContents.openDevTools()
+  pickerDialog.webContents.openDevTools();
   pickerDialog.on("closed", () => {
     pickerDialog = null;
   });
   return pickerDialog;
 };
 
+const openPickerDialog = (event, options) => {
+  getPickerDialog();
+  pickerDialog.webContents.on("did-finish-load", () => {
+    pickerDialog.webContents.send("get-sources", options);
+  });
+  pickerDialog.show();
+};
+
 app.on("ready", () => {
   getMainWindow();
 });
 
-ipcMain.on("show-picker", (event, options) => {
-  getPickerDialog();
-  pickerDialog.show();
-  setTimeout(() => {
-    pickerDialog.webContents.send("get-sources", options);
-  }, 1000);
-});
+/** render process to main process emsg */
+ipcMain.on("show-picker", openPickerDialog);
 
+/** render process to main process emsg */
 ipcMain.on("source-id-selected", (event, sourceId) => {
   pickerDialog.close();
   mainWindow.webContents.send("source-id-selected", sourceId);
