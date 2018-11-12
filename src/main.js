@@ -1,5 +1,10 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const qs = require("qs");
+if (require('electron-squirrel-startup')) return;
+const squirrelEvent = process.argv[1];
+if(squirrelEvent === '--squirrel-firstrun'){
+  return;
+}
 
 // var cp = require("child_process");
 // //删除vanish2的键值
@@ -83,6 +88,8 @@ const openPickerDialog = (event, options) => {
 app.on("ready", () => {
   getMainWindow();
 });
+
+app.on("window-all-closed", () => app.quit());
 
 /** render process to main process emsg */
 ipcMain.on("show-picker", openPickerDialog);

@@ -1,5 +1,5 @@
 {
-  "name": "electron-screen-recorder",
+  "name": "screenrecorder",
   "description": "Screen Recorder",
   "version": "0.0.1",
   "author": "zxy",
@@ -11,17 +11,13 @@
     "WebRTC"
   ],
   "scripts": {
-    "build": "electron-packager ./ app --app-version=0.0.1 --overwrite",
-    "build-all": "electron-packager ./ app  --all --app-version=0.0.1 --overwrite",
-    "launch": "node ./launch.js",
-    "start": "electron ./",
-    "install": "node ./winInstaller.js",
-    "zip": "electron-installer-zip ./app-win32-x64 ./dist/app.zip"
+    "build": "node build.js",
+    "build-all": "node build.js --all",
+    "start": "electron .",
+    "win-installer": "node ./win-installer.js",
+    "zip": "node ./zip.js"
   },
   "main": "src/main.js",
-  "bin": {
-    "electron-screen-recorder": "./launch.js"
-  },
   "devDependencies": {
     "cross-env": "^5.2.0",
     "electron": "^3.0.8",
@@ -32,6 +28,7 @@
   },
   "dependencies": {
     "domify": "^1.4.0",
+    "electron-squirrel-startup": "^1.0.0",
     "minimist": "^1.2.0",
     "qs": "^6.5.2"
   }
