@@ -11,20 +11,20 @@
     "WebRTC"
   ],
   "scripts": {
-    "build": "node build.js",
-    "build-all": "node build.js --all",
     "start": "electron .",
+    "build": "node build.js",
+    "zip": "node ./zip.js",
     "win-installer": "node ./win-installer.js",
-    "zip": "node ./zip.js"
+    "win-inno-installer": "node ./win-inno-installer.js"
   },
   "main": "src/main.js",
   "devDependencies": {
     "cross-env": "^5.2.0",
     "electron": "^3.0.8",
-    "electron-installer-zip": "^0.1.2",
     "electron-packager": "^12.2.0",
-    "electron-prebuilt": "^1.4.13",
-    "electron-winstaller": "^2.7.0"
+    "electron-installer-zip": "^0.1.2",
+    "electron-winstaller": "^2.7.0",
+    "innosetup-compiler": "^5.5.9"
   },
   "dependencies": {
     "domify": "^1.4.0",

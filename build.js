@@ -26,6 +26,7 @@ function deleteFolder(path) {
 deleteFolder(path.resolve(__dirname, config.releaserDir));
 
 const all = params.indexOf("--all") !== -1;
+
 packager({
   dir: path.resolve(__dirname, "."),
   all,
@@ -33,7 +34,9 @@ packager({
   name: process.env.npm_package_name,
   overwrite: true,
   asar: true,
-  out: path.resolve(__dirname, config.packageDir)
+  out: path.resolve(__dirname, config.packageDir),
+  platform: 'win32',
+  arch: "x64"
 })
   .then(appPaths => {
     console.log("success", appPaths);

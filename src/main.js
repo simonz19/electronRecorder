@@ -6,18 +6,6 @@ if(squirrelEvent === '--squirrel-firstrun'){
   return;
 }
 
-// var cp = require("child_process");
-// //删除vanish2的键值
-// cp.exec("REG QUERY HKEY_CLASSES_ROOT\\MyAPP\\shell\\open\\command", function(
-//   error,
-//   stdout,
-//   stderr
-// ) {
-//   console.log('error', error);
-//   console.log('stdout', stdout);
-//   console.log('stderr', stderr);
-// });
-
 const argv = process.argv;
 let params;
 
