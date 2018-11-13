@@ -26,7 +26,7 @@ let pickerDialog;
 
 /** only main process can access node run time */
 const parseArgv = () => {
-  const searchReg = /myapp:\/\/([^\/]+)\/?/.exec(argv[1]);
+  const searchReg = /.+:\/\/([^\/]+)\/?/.exec(argv[1]);
   const search = searchReg && searchReg[1];
   if (search) {
     params = qs.parse(search);

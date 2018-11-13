@@ -1,12 +1,12 @@
 Windows Registry Editor Version 5.00
 
-[HKEY_CLASSES_ROOT\MyAPP]
-@="Open MyAPP"
+[HKEY_CLASSES_ROOT\zxy]
+@="Open zxy"
 "URL Protocol"=""
 
-[HKEY_CLASSES_ROOT\MyAPP\shell]
+[HKEY_CLASSES_ROOT\zxy\shell]
 
-[HKEY_CLASSES_ROOT\MyAPP\shell\open]
+[HKEY_CLASSES_ROOT\zxy\shell\open]
 
-[HKEY_CLASSES_ROOT\MyAPP\shell\open\command]
-@="\"C:\\Users\\simonz\\AppData\\Local\\screenrecorder\\app.exe\",\"%1\""
+[HKEY_CLASSES_ROOT\zxy\shell\open\command]
+@="\"C:\\Program Files (x86)\\screenrecorder\\screenrecorder.exe,\"%1\""
