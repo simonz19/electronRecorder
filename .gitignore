@@ -3,3 +3,4 @@ dist
 path.txt
 .DS_Store
 npm-debug.log
+inno-setup.iss

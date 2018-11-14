@@ -1,42 +1,27 @@
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const packager = require("electron-packager");
 const argv = process.argv;
-const params = argv.slice(2);
-const config = require('./config');
+const config = require("./package.json");
+const args = {
+  platform: os.platform(),
+  arch: os.arch(),
+  ...require("minimist")(argv.slice(2))
+};
 
-// recursion delete file and folder
-function deleteFolder(path) {
-  var files = [];
-  if (fs.existsSync(path)) {
-    files = fs.readdirSync(path);
-    files.forEach(function(file, index) {
-      var curPath = path + "/" + file;
-      if (fs.statSync(curPath).isDirectory()) {
-        // recurse
-        deleteFolder(curPath);
-      } else {
-        // delete file
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(path);
-  }
-}
-deleteFolder(path.resolve(__dirname, config.releaserDir));
-
-const all = params.indexOf("--all") !== -1;
+require("./utils").deleteFileOrDirSync(path.resolve(__dirname, config._releaseDir));
 
 packager({
   dir: path.resolve(__dirname, "."),
-  all,
-  appVersion: process.env.npm_package_version,
-  name: process.env.npm_package_name,
+  all: false,
+  appVersion: config.version,
+  name: config.name,
   overwrite: true,
   asar: true,
-  out: path.resolve(__dirname, config.packageDir),
-  platform: 'win32',
-  arch: "x64"
+  out: path.resolve(__dirname, config._packageDir),
+  platform: args.platform,
+  arch: args.arch
 })
   .then(appPaths => {
     console.log("success", appPaths);

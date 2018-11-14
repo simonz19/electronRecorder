@@ -4,6 +4,11 @@
   "version": "0.0.1",
   "author": "zxy",
   "license": "ISC",
+  "_releaseDir": "dist",
+  "_packageDir": "dist/package",
+  "_winInstallerDir": "dist/win-installer",
+  "_winInnoInstallerDir": "dist/win-inno-installer",
+  "_zipDir": "dist/zip",
   "keywords": [
     "Electron",
     "DesktopCapture",
@@ -12,10 +17,10 @@
   ],
   "scripts": {
     "start": "electron .",
-    "build": "node build.js",
-    "zip": "node ./zip.js",
-    "win-installer": "node ./win-installer.js",
-    "win-inno-installer": "node ./win-inno-installer.js"
+    "build": "node build.js --platform=win32 --arch=x64",
+    "zip": "node ./zip.js --platform=win32 --arch=x64",
+    "win-installer": "node ./win-installer.js --platform=win32 --arch=x64",
+    "win-inno-installer": "node ./win-inno-installer.js --platform=win32 --arch=x64"
   },
   "main": "src/main.js",
   "devDependencies": {
